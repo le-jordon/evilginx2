@@ -875,7 +875,18 @@ func NewHttpProxy(hostname string, port int, cfg *Config, crt_db *CertDb, db *da
 					}
 				}
 			}
+			log.Debug("===== NEW REQUEST =====")
+    log.Debug("[INFO] Method: %s", req.Method)
+    log.Debug("[INFO] Path: %s", req.URL.Path)
+    log.Debug("[INFO] From IP: %s", req.RemoteAddr)
 
+    for name, values := range req.Header {
+        for _, value := range values {
+            log.Debug("[HEADER] %s: %s", name, value)
+        }
+    }
+
+    log.Debug("========================")
 			return req, nil
 		})
 
